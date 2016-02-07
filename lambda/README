@@ -1,0 +1,13 @@
+Lambda calculus with pairs example from PPDP07 and TPLP
+
+	lam.apl			Basic lambda calculus (syntax)
+	lam-bug.apl		Basic lambda calculus static/dymanic semantics (buggy)
+	lam-debug.apl		Basic lambda calculus (debugged)
+	lam-check.apl		Negation independent checks
+	lam-check-ne.apl	Checks for negation elimination with best subgoal ordering
+	permutations-nf.apl	Checks for NF with various orderings
+
+	
+
+
+
