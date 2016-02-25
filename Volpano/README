@@ -1,0 +1,24 @@
+Volpano et al case study:
+
+imp.apl		standard IMP language
+
+volpano.apl	correct encoding of Volpano system inspired by  Nipkow and Kelin's Concrete Semantics
+volpano-bug1.apl the Nipkow bug to confinment and non-interference
+		 secty(L,T,seq(C1,C2)) :-   secty(L,T,C1). %%,secty(L,T,C2).
+
+volpano-bug2.apl: bug into assn rule
+
+		  secty(L,T,assn(X,A)) :- 
+		    exists LX. lookup(T,X,LX), 
+		      exists LA. asec(A, T, LA), 
+		        le(LX,LA), %BUG. was le(LA,LX).
+			  le(L,LX).
+
+check.apl    checks for antimono, confinment, non-interf
+-------------
+
+How to call (* being 1 or 2)
+
+NF: aprolog   -check-nf imp.apl volpano.apl volpano-bug*.apl check.apl
+
+NE: aprolog  -l  -check-ne imp.apl volpano.apl volpano-bug*.apl check.apl 
