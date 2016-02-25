@@ -1,0 +1,32 @@
+This dir contains examples from Peirce's SF book, whereas the systems
+come from TAPL. 
+
+All samples are (buggy) variations on basic systems, such that
+determinism, preservation and/or progress may fail
+
+c8/ (chapter 8 in TAPL): the language
+of typed arithmetic (no binders).  SF's chapter: Types.v
+
+Failure of subject expansion:
+  aprolog -check-n* tyarith.apl subexp.apl
+
+Variations: 
+
+  aprolog -check-n* tyarith.apl var*.apl check.apl
+
+
+c9/ (chapter 8 in TAPL9 simply-typed lambda calculus with booleans)
+
+see also SF's: StlcProp.v chapter
+
+aprolog    -check-n* stlc.apl  check.apl var*.apl
+
+to check the 3 properties, except var3, which, missing one rule, it is re-implemented as 
+
+aprolog    -check-n* var3.apl  check.apl
+
+
+---------------------
+The tool finds all the counterexample mentioned in all the
+exercises.
+
