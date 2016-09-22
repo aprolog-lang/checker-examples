@@ -8,6 +8,21 @@ Lambda calculus with pairs example from PPDP07 and TPLP
 	permutations-nf.apl	Checks for NF with various orderings
 
 	
+From the command line, to use NF type
 
+aprolog -check-nf lam.apl lam-bug.apl lam-check.apl
 
+To use NE
 
+aprolog -check-ne -l lam.apl lam-bug.apl lam-check.apl 
+
+For NE^-
+
+aprolog -check-ne-minus -l lam.apl lam-bug.apl lam-check.apl 
+
+To instead use a specialized format of checks as in lam-check-ne.apl or
+permutations-nf.apl, type
+
+aprolog -check-ne -l -cc lam.apl lam-bug.apl lam-check-ne.apl 
+
+aprolog -check-nf -cc lam.apl lam-bug.apl permutations-nf.apl 

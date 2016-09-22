@@ -15,11 +15,11 @@ Variations:
   aprolog -check-n* tyarith.apl var*.apl check.apl
 
 
-c9/ (chapter 8 in TAPL9 simply-typed lambda calculus with booleans)
+c9/ (chapter 8 in TAPL9: simply-typed lambda calculus with booleans)
 
 see also SF's: StlcProp.v chapter
 
-aprolog    -check-n* stlc.apl  check.apl var*.apl
+aprolog    -check-n* stlc.apl   var*.apl check.apl
 
 to check the 3 properties, except var3, which, missing one rule, it is re-implemented as 
 
