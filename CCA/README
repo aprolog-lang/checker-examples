@@ -1,0 +1,25 @@
+% A partial alphaProlog  formalization of "Causal Commutative Arrows"
+% from ICFP 2009
+% Following "Run your Research", POPL 2012.
+% Author: James Cheney, modified by Alberto Momigliano
+
+From the command line, to use NF type
+
+aprolog -check-nf cca.apl  check.apl
+
+To use NE
+
+aprolog -check-ne -l cca.apl check.apl 
+
+For NE^-
+
+aprolog -check-ne-minus -l cca.apl check.apl
+
+
+% results in terms of sec and depth level, time our 60 seconds
+|--------------+-----+-----+-----|
+| Property     | NF  | NE  | NE- |
+|--------------+-----+-----+-----|
+| exists_norm  |0.1,7|55,8 |3.6,8| 
+| red_equiv    | to  |0,6  |0,6	 |
+|--------------+-----+-----+-----|
