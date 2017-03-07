@@ -1,5 +1,5 @@
-Lambda calculus with pairs example from PPDP07 and TPLP
-
+% Lambda calculus with pairs example from PPDP07 and TPLP
+% Author: James Cheney, modified by Alberto Momigliano
 	lam.apl			Basic lambda calculus (syntax)
 	lam-bug.apl		Basic lambda calculus static/dymanic semantics (buggy)
 	lam-debug.apl		Basic lambda calculus (debugged)
