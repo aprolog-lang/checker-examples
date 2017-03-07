@@ -1,0 +1,14 @@
+Benchmarks from http://docs.racket-lang.org/redex/benchmark.html#%28part._sec~3ab~3astlc%29
+
+stlcL.apl		the signature
+stlcL-bug*.apl		the static and dynamic semantics with bugs
+stlcL-debug.apl		the same w/o bugs
+check.apl		the ne/nf checks
+
+
+Sample query:
+
+aprolog -check-nf stlcL.apl stlcL-bug1.apl check.apl
+
+For empirical results, see table 1, 2 and fugure 4 in Advances in
+Property-Based Testing for αProlog
