@@ -1,0 +1,38 @@
+A formalization of "lambda-zap" from the paper
+
+Static Typing for a Faulty Lambda Calculus
+D. Walker, L. Mackey, J. Ligatti, G. A. Reis, D. I. August
+ICFP 2016, p. 38-49
+
+To run using negation-as-failure, do:
+
+aprolog -check-nf zap.apl  check.apl
+
+To run using negation elimination, do:
+
+aprolog -check-ne -l zap.apl  check.apl
+
+To run using negation elimination with intensional universal quantification, do:
+
+aprolog -check-ne-minus -l zap.apl  check.apl
+
+Checks:
+
+step_det  - determinism of evaluation steps
+step1_det - determinism of basic steps
+subst_fun - substitution is a function
+fstep_det - determinism of faulty steps (should fail)
+lemma2    - lemma 2 from paper (progress)
+lemma3.1  - lemma 3 from paper (reliability weakening)
+lemma3.2  - "
+lemma4    - lemma 4 fromapper (Preservation: core rules)
+lemma5.1  - lemma 5 from paper (Preservation: top-level rules)
+lemma5.2  - "
+theorem6  - theorem 6 from paper (j-safety)
+2fault-breaks-lemma5.2 - a test that verifies that two faulty steps
+                         violate type preservation (should fail)
+
+
+Some bugs (found using alphaCheck) are commented
+out in the code alongside the corrected clauses.
+
