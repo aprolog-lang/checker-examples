@@ -7,20 +7,16 @@
 #check "sub_fresh" 4 : x # M => subst(M,x,N) = M.
 
 #check "sub_comm" 4  : 
-	x # N',
-	X0 = subst(M,x,N),
-	Y0 = subst(M,y,N'),
-	Y = subst(Y0,x,Y1),
-	X = subst(X0,y,N'),
-	Y1 = subst(N,y,N')
+	x # N'
 	 => 
-        X = Y.
+        subst(subst(M,x,N),y,N') = subst(subst(M,y,N'),x,subst(N,y,N')).
+
 #check "tc_weak" 5 : tc(G,E,T),valid_ctx(G) => 
                      new x. tc([(x,T')|G],E,T).
 
 #check "tc_subst"  4 : x # (G,E), tc(G,E,T), tc([(x,T)|G],E',T'),
-                     valid_ctx(G), E'' = subst(E',x,E) => 
-                     tc(G,E'',T').
+                     valid_ctx(G)  => 
+                     tc(G,subst(E',x,E),T').
 
 #check "tc_pres" 6 : tc([],M,T), step(M,M') => tc([],M',T).
 

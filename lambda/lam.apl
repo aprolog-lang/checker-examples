@@ -1,7 +1,6 @@
 exp : type.
 id  : name_type.
 ty  : type.
-ctx : type.
 
 u   : exp.
 var : id -> exp.

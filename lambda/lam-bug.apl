@@ -3,7 +3,9 @@ func subst(exp,id,exp) = exp.
 subst(var(Y),X,N) = N :- X = Y.
 subst(var(Y),X,N) = var(X') :- X # Y, X = X'.
 subst(app(M1,M2),X,N) = app(subst(M1,X,N), subst(M2,X,N)).
-subst(lam(M),X,N) = lam(M') :- new y. subst(M@y,X,N)  = M'@y.
+%subst(lam(M),X,N) = lam(M') :- new y. subst(M@y,X,N)  = M'@y.
+%subst(lam(y\M),X,N) = lam(y\subst(M,X,N)) :- y # X, y # N.
+subst(lam(y\M),X,N) = lam(y\subst(M,X,N)).
 subst(u,_,_) = u.
 subst(pair(M1,M2),X,N) = pair(subst(M1,X,N),subst(M1,X,N)).
 subst(fst(M),X,N) = fst(subst(M,X,M)).

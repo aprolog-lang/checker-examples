@@ -1,4 +1,4 @@
-%% Aithor: AM
+%% Author: AM
 %% First we introduce IMP (a la Nipkow)
 
 %% we cannot use int,bool from Prelude, so we deploy ours
