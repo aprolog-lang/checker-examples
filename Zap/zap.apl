@@ -76,7 +76,6 @@ vote((_,V),(_,V),_) = V.
 vote((_,V),_,(_,V)) = V.
 vote(_,(_,V),(_,V)) = V.
 
-
 func subst(exp,exp,id) = exp.
 subst(var(X),M,X) = M.
 subst(var(Y),M,X) = var(Y) :- X # Y.
@@ -148,7 +147,7 @@ step1((M,plus(val (C,_),val (C,_))),[],(M,val (C,vn _))).
 step1((M,leq(val(C,_), val(C,_))), [], (M, val(C,vb _))).
 step1((M,cond(val(_,vb true), E1, E2)), [], (M,E1)).
 step1((M,cond(val(_,vb false), E1, E2)), [], (M,E1)).
-step1((M,lam3(T,x1\x2\x3\E)), [], ([(L,lam3(T,x1\x2\x3\E))|M],tri(val(r,vl(L)),val(g,vl(L)),val(b,vl(l)))))
+step1((M,lam3(T,x1\x2\x3\E)), [], ([(L,lam3(T,x1\x2\x3\E))|M],tri(val(r,vl(L)),val(g,vl(L)),val(b,vl(L)))))
 	:- L # M.
 step1((M,app(tri(val V1,val V2,val V3), tri(val W1,val W2,val W3))),[],
       (M,N))
