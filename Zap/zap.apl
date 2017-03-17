@@ -114,9 +114,9 @@ pred mem3((loc,ty),[(loc,ty)]).
 (* Evaluation context step *)
 pred step(state,[int],state).
 (* Redex step *)
-pred step1(state,[int],state).
+pred simpleStep(state,[int],state).
 
-step(E,S,E') :- step1(E,S,E').
+step(E,S,E') :- simpleStep(E,S,E').
 step((M,plus(E1,E2)),S,(M',plus(E1',E2))) :- step((M,E1),S,(M',E1')).
 
 (* BUG *)
@@ -143,21 +143,21 @@ step((M,let3(E1,E2)),S,(M',let3(E1',E2))) :- step((M,E1),S,(M',E1')).
 step((M,let(E1,E2)),S,(M',let(E1',E2))) :- step((M,E1),S,(M',E1')).
 
 
-step1((M,plus(val (C,_),val (C,_))),[],(M,val (C,vn _))).
-step1((M,leq(val(C,_), val(C,_))), [], (M, val(C,vb _))).
-step1((M,cond(val(_,vb true), E1, E2)), [], (M,E1)).
-step1((M,cond(val(_,vb false), E1, E2)), [], (M,E1)).
-step1((M,lam3(T,x1\x2\x3\E)), [], ([(L,lam3(T,x1\x2\x3\E))|M],tri(val(r,vl(L)),val(g,vl(L)),val(b,vl(L)))))
+simpleStep((M,plus(val (C,_),val (C,_))),[],(M,val (C,vn _))).
+simpleStep((M,leq(val(C,_), val(C,_))), [], (M, val(C,vb _))).
+simpleStep((M,cond(val(_,vb true), E1, E2)), [], (M,E1)).
+simpleStep((M,cond(val(_,vb false), E1, E2)), [], (M,E1)).
+simpleStep((M,lam3(T,x1\x2\x3\E)), [], ([(L,lam3(T,x1\x2\x3\E))|M],tri(val(r,vl(L)),val(g,vl(L)),val(b,vl(L)))))
 	:- L # M.
-step1((M,app(tri(val V1,val V2,val V3), tri(val W1,val W2,val W3))),[],
+simpleStep((M,app(tri(val V1,val V2,val V3), tri(val W1,val W2,val W3))),[],
       (M,N))
 	:- vote(V1,V2,V3) = vl(L), 
 	mem2((L,lam3(T,x1\x2\x3\E)),M),
 	N = subst3(E,val W1,x1,val W2,x2,val W3,x3).
-step1((M,let(val V,x\E)),[],(M,N)) :- N = subst(E,val V, x).
-step1((M,let3(tri(val V1, val V2, val V3),x1\x2\x3\E)),[],
+simpleStep((M,let(val V,x\E)),[],(M,N)) :- N = subst(E,val V, x).
+simpleStep((M,let3(tri(val V1, val V2, val V3),x1\x2\x3\E)),[],
 	(M,N)) :- N= subst3(E,val V1,x1,val V2,x2,val V3,x3).
-step1((M,out(tri(val V1, val V2, val V3),E2)),[N],(M,E2))
+simpleStep((M,out(tri(val V1, val V2, val V3),E2)),[N],(M,E2))
 	:- vote(V1,V2,V3) = vn N.
 
 pred steps(state,[int],state).

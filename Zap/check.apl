@@ -1,5 +1,5 @@
 #check "step_det" 5 : step(ME,S,ME'), step(ME,S',ME''), state(ME),state(ME'),state(ME'') => S = S'.
-#check "step1_det" 5 : step1(ME,S,ME'), step1(ME,S',ME''), state(ME),state(ME'),state(ME'') => S = S'.
+#check "step1_det" 5 : simpleStep(ME,S,ME'), simpleStep(ME,S',ME''), state(ME),state(ME'),state(ME'') => S = S'.
 
 
 % ok but long
@@ -18,7 +18,7 @@ subst(E,M,X) = E2 => E1 = E2.
 #check "lemma3.2" 10 : statetc(none,(M,E),T),heap(M)
 	=> statetc(some(C),(M,E),T).
 
-#check "lemma4" 10 : statetc(some Z,(M,E),T), step1((M,E),S,(M',E')),
+#check "lemma4" 10 : statetc(some Z,(M,E),T), simpleStep((M,E),S,(M',E')),
 color(Z), heap(M), heap(M')
 	=> statetc(some Z,(M',E'),T).
 
