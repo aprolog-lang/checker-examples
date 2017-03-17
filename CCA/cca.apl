@@ -31,7 +31,7 @@ traceC : const.
 arrC : const.
 seqC :  const.
 firstC : const.
-secondC : const.
+(*secondC : const.*)
 loopC : const.
 initC :  const.
 loopBC : const.
@@ -49,6 +49,17 @@ const : const -> exp.
 
 
 type ctx = [(var,ty)]. 
+
+func subst(exp,var,exp) = exp.
+subst(var(X),X,M) = M.
+subst(var(X),Y,M) = var(X) :- X # Y.
+subst(pair(M,N),Y,P) = pair(subst(M,Y,P),subst(N,Y,P)).
+subst(fst(M),Y,P) = fst(subst(M,Y,P)).
+subst(snd(M),Y,P) = snd(subst(M,Y,P)).
+subst(app(M,N),Y,P) = app(subst(M,Y,P),subst(N,Y,P)).
+subst(lam(x\M),Y,P) = lam(x\subst(M,Y,P)) :- x # (Y,P).
+subst(unit,_,_) = unit.
+subst(const(C),_,_) = const(C).
 
 %%% Typing rules (fig. 6)
 
@@ -73,8 +84,8 @@ constTy(seqC,
         funTy(arrTy(A,B),funTy(arrTy(B,G),arrTy(A,G)))).
 constTy(firstC,
         funTy(arrTy(A,B), arrTy(pairTy(A,G),pairTy(B,G)))).
-constTy(secondC,
-        funTy(arrTy(A,B), arrTy(pairTy(C,A),pairTy(C,B)))).
+(*constTy(secondC,
+        funTy(arrTy(A,B), arrTy(pairTy(C,A),pairTy(C,B)))).*)
 constTy(loopC, 
         funTy(arrTy(pairTy(A,G),pairTy(B,G)),arrTy(A,B))).
 constTy(initC, funTy(A,arrTy(A,A))).
@@ -172,12 +183,20 @@ constDef(shuffleInvC, comp (times id (const transposeC)) (const assocC)).
 pred beta(exp,exp).
 beta(fst(pair(X,Y)),X).
 beta(snd(pair(X,Y)),Y).
+beta(app(lam(x\X),Y), subst(X,x,Y)) :- x # Y.
+beta(const(C),E) :- constDef(C,E).
+beta(pair(M,N),pair(M',N)) :- beta(M,M').
+beta(pair(M,N),pair(M,N')) :- beta(N,N').
+beta(fst(M),fst(M')) :- beta(M,M').
+beta(snd(M),snd(M')) :- beta(M,M').
+beta(app(M,N),app(M',N)) :- beta(M,M').
+beta(app(M,N),app(M,N')) :- beta(N,N').
+beta(lam(x\M),lam(x\M')) :- beta(M,M').
 
 % Reduction steps
 
 
 pred red(exp,exp).
-red(const(C),E) :- constDef(C,E).
 red(E,E') :- beta(E,E').
 red(loop F, loopB unit (seq (arr (const assocInvC)) (seq (first F) (arr (const assocC))))).
 red(init I, loopB I (arr (comp (const swapC) (comp (const juggleC) (const swapC))))).
@@ -195,6 +214,7 @@ ccnf(X) :- (exists Z. X = arr(Z)); (exists Y, Z. X = loopB Y (arr Z)).
 
 pred norm(exp,exp).
 norm(E,E') :- ccnf(E), E = E'.
+norm(E,E'') :- beta(E,E'), norm(E',E'').
 norm(seq E1 E2, E') :-
 	 exists E1'. norm(E1,E1'),
 	 exists E2'. norm(E2,E2'),
@@ -212,6 +232,8 @@ pred equiv(exp,exp).
 % Lambda calculus laws
 equiv(const C, D) :- constDef(C,D).
 equiv(E,E') :- beta(E,E').
+equiv(E,E') :- equiv(E',E).
+equiv(E,E'') :- exists E'. equiv(E,E'), equiv(E',E'').
 % more TODO
 
 % Arrow laws
