@@ -16,10 +16,13 @@ For NE^-
 aprolog -check-ne-minus -l cca.apl check.apl
 
 
-% results in terms of sec and depth level, time our 60 seconds
-|--------------+-----+-----+-----|
-| Property     | NF  | NE  | NE- |
-|--------------+-----+-----+-----|
-| exists_norm  |0.1,7|55,8 |3.6,8| 
-| red_equiv    | to  |0,6  |0,6	 |
-|--------------+-----+-----+-----|
+% TESS: For each test, we used the largest n for which all three
+approaches were successful within the time-out -- 40 seconds
+|--------------+-----+-----+-----|---|
+| Property     | NF  | NE  | NE- | D |
+|--------------+-----+-----+-----|---|
+| exists_norm  |0.3  |36   |0.1	 | 6 |
+| red_equiv    |0.5  |0.6  |0.6	 | 4 |
+|--------------+-----+-----+-----|---|
+
+% TFCE: nothing found

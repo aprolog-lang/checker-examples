@@ -4,6 +4,9 @@ Harper, R. and Pfenning, F. 2005.
 On equivalence and canonical forms in the LF type theory.
 ACM Trans. Comput. Logic 6, 1, 61–101.
 
+file lf-eq.apl	   debugged version
+file lf-eq-bug.apl version with errors
+
 From the command line, to use NF type
 
 aprolog -check-nf lf-eq.apl  check.apl
@@ -18,4 +21,13 @@ aprolog -check-ne-minus -l lf-eq.apl check.apl
 
 
 The properties checked are lemmas 3.2, 3.3, 3.4 and 3.5, syntactic properties of the
-algorithmic equivalence judgment from the paper.  
+algorithmic equivalence judgment from the paper.
+
+|--------------+-----+-----+-----|
+| Property     | NF  | NE  | NE- |
+|--------------+-----+-----+-----|
+| lem3.2(1)    |0.1,7|to   |to   | 
+| lem3.4(1)    |0.1,7|0.1,7|0.1,7|
+| lem3.4(2)    |0.1,7| to  |to	 |
+| lem3.5(2)    |0,1,7|to   |to	 |
+|--------------+-----+-----+-----|

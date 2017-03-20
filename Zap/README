@@ -36,3 +36,10 @@ theorem6  - theorem 6 from paper (j-safety)
 Some bugs (found using alphaCheck) are commented
 out in the code alongside the corrected clauses.
 
+% results in terms of sec and depth level, time our 40 seconds
+|--------------+-----+-----+-----|
+| Property     | NF  | NE  | NE- |
+|--------------+-----+-----+-----|
+| fstep_det    |0.1,3|0,2  |same | 
+| 2fault       |0,3  |0,3  |same |
+|--------------+-----+-----+-----|

@@ -6,7 +6,7 @@
 
 #check "sub_fresh" 4 : x # M => subst(M,x,N) = M.
 
-#check "sub_comm" 4  : 
+#check "sub_comm" 3  : 
 	x # N'
 	 => 
         subst(subst(M,x,N),y,N') = subst(subst(M,y,N'),x,subst(N,y,N')).
@@ -22,4 +22,4 @@
 
 #check "tc_prog" 8 : tc([],E,T) => progress(E).
 
-#check "tc_sound" 6 : tc([],E,T), steps(E,E') => tc([],E',T).
+#check "tc_sound" 7 : tc([],E,T), steps(E,E') => tc([],E',T).

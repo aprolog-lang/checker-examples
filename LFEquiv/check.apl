@@ -1,4 +1,4 @@
-#check "lem3.2(1)" 10 : 
+#check "lem3.2(1)" 15 : 
   alg_eq_o(G,M,N,T), x # G, x # M, x # N, x # T, x # T', wf_sctx([(x,T')|G]) => alg_eq_o([(x,T')|G],M,N,T).
 
 #check "lem3.2(2)" 10 : 
@@ -28,7 +28,7 @@
 
 #check "lem3.4(1)" 10:
   str_eq_o(D,M,N,T), wf_sctx(D) => str_eq_o(D,N,M,T).
-#check "lem3.4(2)" 10:
+#check "lem3.4(2)" 12:
   alg_eq_o(D,M,N,T), wf_sctx(D) => alg_eq_o(D,N,M,T).
 #check "lem3.4(3)" 10:
   str_eq_t(D,M,N,T), wf_sctx(D) => str_eq_t(D,N,M,T).
@@ -42,7 +42,7 @@
 #check "lem3.5(1)" 8 :
   str_eq_o(D,M,N,T), str_eq_o(D,N,O,T), 
   wf_sctx(D)  => str_eq_o(D,M,O,T).
-#check "lem3.5(2)" 8:
+#check "lem3.5(2)" 12:
   alg_eq_o(D,M,N,T), alg_eq_o(D,N,O,T) , 
   wf_sctx(D) => alg_eq_o(D,M,O,T).
 
