@@ -1,0 +1,27 @@
+An encoding of a form of MiniMl with pairs, sums and fix, following
+TAPL, chapter 11. The bug is forgetting to annotate injections with
+types (see 11.9).
+
+Authors: Francesco Komauli & Alberto Momigliano
+
+- aprolog -check-ne-minus -l -wq miniml-bug.apl check.apl 
+
+ty_uniq: tc([],E,T), tc([],E,T') => T = T'
+
+Checking depth 1 2
+Total: 0.004 s:
+E = inl(u) 
+T = sumTy(unitTy,sumTy(_3174)) 
+T' = sumTy(unitTy,pairTy(_3172)) 
+
+- aprolog -check-nf miniml-bug.apl lam-check.apl
+
+Checking depth 1 2 3 4 5
+Total: 2.484 s:
+E = app(lam(unitTy,x1127307\inl(u)),u) 
+G = [] 
+T = sumTy(unitTy,sumTy(unitTy,unitTy)) 
+T' = sumTy(unitTy,pairTy(unitTy,unitTy)) 
+
+
+
